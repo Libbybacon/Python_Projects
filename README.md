@@ -1,2 +1,2 @@
 # Python_Projects
-Collection of projects completed using Python
+This repository is a collection of projects I have completed using Python

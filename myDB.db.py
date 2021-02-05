@@ -28,7 +28,7 @@ for file in fileList:
     if file.endswith('.txt'):
         with conn:
             cur = conn.cursor()
-            cur.execute("INSERT INTO fileNames(fileName) VALUES (?)", (file))
+            cur.execute("INSERT INTO fileNames(fileName) VALUES (?)", (file,))
             # I was thinking that it would do this with each file, individually, as it iterates through, but I get an
             # error saying "sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 1,
             # and there are 9 supplied."

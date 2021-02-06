@@ -61,6 +61,8 @@ class Business(Building):
 
 # Code to invoke getBuildingDetails method in each class
 
+
+if __name__ == "__main__":
 buildingOwner = Building()
 buildingOwner.getBuildingDetails()
 

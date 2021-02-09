@@ -13,23 +13,33 @@ class sale(ABC):
         item = input('Which item, car or boat, are you purchasing?\n>>>  ').lower()
         if item == 'car':
             itemPrice = 5000.00
-            print('A new car costs $5,000 before tax')
+            
         if item == 'boat':
             itemPrice = 8000.00
-            print('A new boat costs $8,000 before tax')
-        
+            
+        return itemPrice
     @abstractmethod
-    def calculateTax(self, tax):
+    def calculateTax(self):
         pass
             
 class californiaSale(sale):
-    def calculateTax(self, tax):
-        total = itemPrice * tax
-        print('Your total today with tax is: {}'.format(total))
+    def calculateTax(self):
+        total = self.price() * .0725 + self.price()
+        print('Your total today in California with tax is: {}'.format(total))
 
 CAcost = californiaSale()
 CAcost.price()
-CAcost.calculateTax(7.25)
+CAcost.calculateTax()
+
+
+class massachusettsSale(sale):
+    def calculateTax(self):
+        total = self.price() * .0625 + self.price()
+        print('Your total including tax in Massachusetts is: {}'.format(total))
+
+MAcost = massachusettsSale()
+MAcost.price()
+MAcost.calculateTax()
 
 
 

@@ -21,7 +21,7 @@ class ParentWindow(Frame):
         self.master.config(bg='white')
         self.master.title('Student Tracking')
 
-        Student_gui.load_gui(self)        
+##        Student_gui.load_gui(self)        
                                    
                               
                             

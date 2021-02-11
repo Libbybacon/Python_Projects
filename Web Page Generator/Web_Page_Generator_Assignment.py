@@ -28,7 +28,7 @@ class ParentWindow(Frame):
         self.lbl_Update.grid(row=0, column=0, columnspan=8, padx=(30,30), pady=(20,0), sticky=E+W)
         master.columnconfigure(0, weight=4)
 
-        # Scrolled text box where user can enter as much text as they want
+        # Scrolled text box where user can enter as much text as they want because I wanted to practice using scrolled text
         self.txt_newText = scrolledtext.ScrolledText(self.master, wrap=tk.WORD)
         self.txt_newText.grid(row=1, column=0, columnspan=8, padx=(30,30), pady=(20,20), sticky=N+E+S+W)
         master.rowconfigure(1, weight=12)
@@ -49,7 +49,7 @@ def generateWebPage(self):
     f = open("WebPageGenerator.html", "w")
     f.write('<html> \n\t<body> \n\t\t<h1> {} \n\t\t</h1> \n\t</body> \n</html>'.format(newBodyText))
     f.close()
-    url = ('file:///Users/Libby/Python Practice/WebPageGenerator.html')
+    url = ('file:///WebPageGenerator.html')
     webbrowser.open_new_tab(url)
         
     

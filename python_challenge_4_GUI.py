@@ -26,11 +26,11 @@ class ParentWindow(Frame):
         self.btn_chkFiles.grid(row=2, column=0, rowspan=2, padx=(30,30), pady=(20,0), sticky=N+E+S+W)
         self.btn_closePrgm = Button(self.master, text='Close Program')
         self.btn_closePrgm.grid(row=2, column=3, rowspan= 2, pady=(20,30), sticky=N+E+S+W)
-
+        master.columnconfigure(1, weight=3)
         self.txt_blank1 =  tk.Entry(self.master, text='')
-        self.txt_blank1.grid(row=0, column=1, columnspan=3, pady=(20,0), sticky=E+W)
+        self.txt_blank1.grid(row=0, column=1, columnspan=3, padx=(0,20), pady=(20,0), sticky=E+W)
         self.txt_blank2 = tk.Entry(self.master, text='')
-        self.txt_blank2.grid(row=1, column=1, columnspan=3, pady=(20,0), sticky=E+W)
+        self.txt_blank2.grid(row=1, column=1, columnspan=3, padx=(0,20), pady=(20,0), sticky=E+W)
 
 
 

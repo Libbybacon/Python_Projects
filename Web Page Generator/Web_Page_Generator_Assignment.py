@@ -49,7 +49,7 @@ def generateWebPage(self):
     f = open("WebPageGenerator.html", "w")
     f.write('<html> \n\t<body> \n\t\t<h1> {} \n\t\t</h1> \n\t</body> \n</html>'.format(newBodyText))
     f.close()
-    url = ('WebPageGenerator.html')
+    url = ('/WebPageGenerator.html')
     webbrowser.open_new_tab(url)
         
     

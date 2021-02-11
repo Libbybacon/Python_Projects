@@ -18,23 +18,21 @@ londonZone = pytz.timezone('Europe/London')
 # Then use range to determine if branch is open; print corresponding statement
 def getTime():
     portlandNow = datetime.datetime.now(portlandZone)
-    portlandHour = portlandNow.strftime('%H')
-    print(portlandHour) # Printing the hour just so I can see it while I work on it
-    if portlandHour in range(9,23):
+    portlandHour = int(portlandNow.strftime('%H'))
+    if portlandHour in range(9,17): 
         print("The Portland branch is open.")
     else:
         print("The portland branch is closed.")
+
     nycNow = datetime.datetime.now(nycZone)
-    nycHour = nycNow.strftime('%H')
-    print(nycHour)
+    nycHour = int(nycNow.strftime('%H'))
     if nycHour in range(9, 17):
         print("The NYC branch is open.")
     else:
         print("The NYC branch is closed.")
    
     londonNow = datetime.datetime.now(londonZone)
-    londonHour = londonNow.strftime('%H')
-    print(londonHour)
+    londonHour = int(londonNow.strftime('%H'))
     if londonHour in range(9,17):
         print("The London branch is open.")
     else:

@@ -16,6 +16,8 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import font
 import datetime
+import time
+
 
 # Create GUI
 class ParentWindow(Frame):
@@ -76,14 +78,12 @@ def transferFiles(self):
 
     for i in files:
         fullPath = os.path.join(source, i)
-        timeNow = datetime.datetime.now()
-        currentTime = timeNow.strftime('%Y-%m-%d %H:%M:%S')
-        lastMod = os.path.getmtime(fullPath)
-        modTime = datetime.datetime.fromtimestamp(lastMod).strftime('%Y-%m-%d %H:%M:%S')
-        timeDiff = currentTime-modTime
-        print(modTime)
-        if timeDiff.hours < 24:
+        timeNow = time.time()
+        lastMod = os.stat(fullPath).st_mtime
+        timeDiff = timeNow-lastMod
+        if timeDiff < 86400:
             shutil.move(fullPath, destination)
+            
 
 def clearText(self):
     self.txt_sourceDir.delete(0, END)

@@ -65,9 +65,11 @@ def transferFiles(self):
     files = os.listdir(source)
 
     for i in files:
-        modTime = os.path.getmtime(i)
+        fullPath = os.path.join(source, i)
+        modTime = os.path.getmtime(fullPath)
+        print(modTime)
         if modTime <= 86400:
-            shutil.move(source+i, destination)
+            shutil.move(fullPath, destination)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ import os
 import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
+from tkinter import font
+import datetime
 
 # Create GUI
 class ParentWindow(Frame):
@@ -22,19 +24,19 @@ class ParentWindow(Frame):
 
         self.master = master
         self.master.title('Transfer Recently Modified Files')
-        self.master.geometry('{}x{}'.format(500,300))
+        self.master.geometry('{}x{}'.format(550,350))
 
         self.lbl_sourceDir = Label(self.master, text='Source directory:')
-        self.lbl_sourceDir.grid(row=0, column = 0, padx=(0,0), pady=(20,0), sticky=E+W)
+        self.lbl_sourceDir.grid(row=0, column = 0, padx=(20,0), pady=(20,0), sticky=W)
         self.lbl_destDir = Label(self.master, text='Destination directory:')
-        self.lbl_destDir.grid(row=2, column = 0, padx=(0,0), pady=(20,0), sticky=E+W)
+        self.lbl_destDir.grid(row=2, column = 0, padx=(20,0), pady=(20,0), sticky=W)
 
         # Text boxes that will display chosen directory path
         self.txt_sourceDir = tk.Entry(self.master)
         self.txt_sourceDir.grid(row=1, column=0, columnspan=3,padx=(20,0), pady=(20,0), sticky=W+E)
         self.txt_destDir = tk.Entry(self.master)
         self.txt_destDir.grid(row=3, column=0, columnspan=3,padx=(20,0), pady=(20,0), sticky=W+E)
-        master.columnconfigure(0, weight=3)
+        master.columnconfigure(0, weight=1)
 
         # Buttons that allow user to select source and destination folders
         self.btn_sourceDir = Button(self.master, text='Select \nSource', command=lambda: getSourcePath(self))
@@ -43,9 +45,17 @@ class ParentWindow(Frame):
         self.btn_sourceDir.grid(row=3, column=3, padx=(20,20), pady=(20,0), sticky=N+E+S+W)
 
         # Button to initiate file check/transfer
-        self.btn_Transfer = Button(self.master, text='Transfer \nFiles', command=lambda: transferFiles(self))
-        self.btn_Transfer.grid(row=4, column=1, pady=(20,20), sticky=W)
+        buttonFont = font.Font(size=16, weight='bold')
+        self.btn_Transfer = Button(self.master, text='Transfer \nFiles', width=8, height=3, bg='green', font=buttonFont, command=lambda: transferFiles(self))
+        self.btn_Transfer.grid(row=4, column=2, pady=(20,20), sticky=W)
         master.columnconfigure(1, weight=1)
+        master.columnconfigure(2, weight=1)
+
+        # Button to clear text boxes
+        self.btn_Transfer = Button(self.master, text='Clear \nFields', width=8, height=3, bg='red', font=buttonFont,  command=lambda: clearText(self))
+        self.btn_Transfer.grid(row=4, column=1, padx=(0,30), pady=(20,20), sticky=W)
+        
+
 
 # Choose source folder and display path in text box   
 def getSourcePath(self):
@@ -66,10 +76,18 @@ def transferFiles(self):
 
     for i in files:
         fullPath = os.path.join(source, i)
-        modTime = os.path.getmtime(fullPath)
+        timeNow = datetime.datetime.now()
+        currentTime = timeNow.strftime('%Y-%m-%d %H:%M:%S')
+        lastMod = os.path.getmtime(fullPath)
+        modTime = datetime.datetime.fromtimestamp(lastMod).strftime('%Y-%m-%d %H:%M:%S')
+        timeDiff = currentTime-modTime
         print(modTime)
-        if modTime <= 86400:
+        if timeDiff.hours < 24:
             shutil.move(fullPath, destination)
+
+def clearText(self):
+    self.txt_sourceDir.delete(0, END)
+    self.txt_destDir.delete(0, END)
 
 
 if __name__ == "__main__":

@@ -44,7 +44,7 @@ class ParentWindow(Frame):
         self.btn_sourceDir = Button(self.master, text='Select \nSource', command=lambda: getSourcePath(self))
         self.btn_sourceDir.grid(row=1, column=3, padx=(20,20), pady=(20,0), sticky=N+E+S+W)
         self.btn_sourceDir = Button(self.master, text='Select \nDestination', command=lambda: getDestPath(self))
-        self.btn_sourceDir.grid(row=3, column=3, padx=(20,20), pady=(20,0), sticky=N+E+S+W)
+        self.btn_sourceDir.grid(row=3, column=3, padx=(20, 20), pady=(20,0), sticky=N+E+S+W)
 
         # Button to initiate file check/transfer
         buttonFont = font.Font(size=16, weight='bold')
@@ -81,6 +81,9 @@ def transferFiles(self):
         timeNow = time.time()
         lastMod = os.stat(fullPath).st_mtime
         timeDiff = timeNow-lastMod
+        print(timeNow )
+        print(lastMod)
+        print(timeDiff)
         if timeDiff < 86400:
             shutil.move(fullPath, destination)
             

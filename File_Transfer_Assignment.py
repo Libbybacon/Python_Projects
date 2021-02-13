@@ -16,6 +16,7 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import font
 import datetime
+from datetime import timedelta
 import time
 
 
@@ -79,12 +80,13 @@ def transferFiles(self):
     for i in files:
         fullPath = os.path.join(source, i)
         timeNow = time.time()
-        lastMod = os.stat(fullPath).st_mtime
-        timeDiff = timeNow-lastMod
-        print(timeNow )
-        print(lastMod)
-        print(timeDiff)
-        if timeDiff < 86400:
+        modTime = os.path.getmtime(fullPath)
+        modDateTime = datetime.datetime.fromtimestamp(modTime)
+        hours_ago_24 = datetime.datetime.now() - timedelta(hours=24)
+        print(modDateTime )
+        print(hours_ago_24)
+        print('\n')
+        if hours_ago_24 < modDateTime:
             shutil.move(fullPath, destination)
             
 
